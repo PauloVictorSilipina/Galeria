@@ -1,4 +1,4 @@
-package rodrigues.alves.victor.galeria;
+package rodrigues.alves.lista.galeria;
 
 import org.junit.Test;
 
