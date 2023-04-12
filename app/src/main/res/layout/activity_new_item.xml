@@ -7,7 +7,7 @@
     tools:context=".NewItemActivity">
 
     <ImageView
-        android:id="@+id/imvPhotoReview"
+        android:id="@+id/imvfotoPreview"
         android:layout_width="0dp"
         android:layout_height="300dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imvPhotoReview"
+        app:layout_constraintTop_toBottomOf="@+id/imvfotoPreview"
         app:srcCompat="@android:drawable/ic_menu_gallery" />
 
     <EditText

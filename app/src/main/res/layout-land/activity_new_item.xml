@@ -7,7 +7,7 @@
     tools:context=".NewItemActivity">
 
     <ImageView
-        android:id="@+id/imvPhotoReview"
+        android:id="@+id/imvfotoPreview"
         android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -39,7 +39,7 @@
         android:hint="Título"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imvPhotoReview"
+        app:layout_constraintStart_toEndOf="@+id/imvfotoPreview"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -56,7 +56,7 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/btnAddItem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imvPhotoReview"
+        app:layout_constraintStart_toEndOf="@+id/imvfotoPreview"
         app:layout_constraintTop_toBottomOf="@+id/etTitle" />
 
     <Button
