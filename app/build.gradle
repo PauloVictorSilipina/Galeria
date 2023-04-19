@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'rodrigues.alves.victor.galeria'
+    namespace 'rodrigues.alves.lista'
     compileSdk 33
 
     defaultConfig {
-        applicationId "rodrigues.alves.victor.galeria"
+        applicationId "rodrigues.alves.lista"
         minSdk 24
         targetSdk 33
         versionCode 1
