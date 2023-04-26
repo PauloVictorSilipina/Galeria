@@ -41,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         RecyclerView rvItens = findViewById(R.id.rvItens);
-        myAdapter = new MyAdapter(this, itens);
-        rvItens.setAdapter(myAdapter);
+        myAdapter = new MyAdapter(this, itens);//myadapter criado
+        rvItens.setAdapter(myAdapter);//setamos o adapter no recycleview
         rvItens.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);//criado um gerenciador de layout linear
         rvItens.setLayoutManager(layoutManager);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvItens.getContext(),
@@ -61,11 +61,14 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == NEW_ITEM_REQUEST) {
             //Caso o resultCode for certo, adiciona o novo item
             if(resultCode == Activity.RESULT_OK) {
+                //Cria my item
                 MyItem myItem = new MyItem();
+                //Adicona titulo, descrição, fotoe adiciona myItem nos itens na tela
                 myItem.title = data.getStringExtra("title");
                 myItem.description = data.getStringExtra("description");
                 myItem.photo = data.getData();
                 itens.add(myItem);
+                //Notifica que inseriu um item
                 myAdapter.notifyItemInserted(itens.size()-1);
             }
         }
