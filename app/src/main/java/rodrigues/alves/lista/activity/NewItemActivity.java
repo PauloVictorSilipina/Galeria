@@ -2,6 +2,7 @@ package rodrigues.alves.lista.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,17 +16,25 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import rodrigues.alves.lista.R;
+import rodrigues.alves.lista.model.NewItemActivityViewModel;
 
 public class NewItemActivity extends AppCompatActivity {
 
     static int PHOTO_PICKER_REQUEST=1;
-    Uri photoSelected=null;
     @Override
 
     //Método onCreate
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_item);
+
+        NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
+
+        Uri selectPhotoLocation = vm.getSelectedPhotoLocation();
+        if(selectPhotoLocation != null) {
+            ImageView imvfotoPreview = findViewById(R.id.imvfotoPreview);
+            imvfotoPreview.setImageURI(selectPhotoLocation);
+        }
 
         //Obtenção do ImageButton
         ImageButton imgCI = findViewById(R.id.imbCI);
@@ -47,7 +56,7 @@ public class NewItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Aviso para dizer que precisa adicionar imagem
-                if(photoSelected == null) {
+                if(selectPhotoLocation == null) {
                     Toast.makeText(NewItemActivity.this, "É necessário selecionar uma imagem!",
                             Toast.LENGTH_LONG).show();
                     return;
@@ -74,7 +83,7 @@ public class NewItemActivity extends AppCompatActivity {
 
                 //Criação da nova intent
                 Intent i = new Intent();
-                i.setData(photoSelected); //Set do Uri da img
+                i.setData(selectPhotoLocation); //Set do Uri da img
                 i.putExtra("title", title); //Seta titulo
                 i.putExtra("description", description); //Seta desc
                 setResult(Activity.RESULT_OK, i); //Resultado da activity
@@ -93,12 +102,13 @@ public class NewItemActivity extends AppCompatActivity {
         if(requestCode == PHOTO_PICKER_REQUEST) {
             //Verifica se o resultCode deu sucesso
             if(resultCode == Activity.RESULT_OK) {
-
-                //Obtenção dos resultados
-                photoSelected = data.getData();
+                Uri photoSelected = data.getData();
                 ImageView imvfotoPreview = findViewById(R.id.imvfotoPreview);
-                //Seleção da URI
+
                 imvfotoPreview.setImageURI(photoSelected);
+
+                NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
+                vm.setSelectedPhotoLocation(photoSelected);
             }
         }
     }

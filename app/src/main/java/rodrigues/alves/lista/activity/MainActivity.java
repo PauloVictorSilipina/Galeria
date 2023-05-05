@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,12 +21,12 @@ import java.util.List;
 
 import rodrigues.alves.lista.R;
 import rodrigues.alves.lista.adapter.MyAdapter;
+import rodrigues.alves.lista.model.MainActivityViewModel;
 import rodrigues.alves.lista.model.MyItem;
 
 public class MainActivity extends AppCompatActivity {
 
     static int NEW_ITEM_REQUEST=1;
-    List<MyItem> itens = new ArrayList<>();
     MyAdapter myAdapter;
     @Override
 
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         RecyclerView rvItens = findViewById(R.id.rvItens);
+        MainActivityViewModel vm = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        List<MyItem> itens = vm.getItens();
         myAdapter = new MyAdapter(this, itens);//myadapter criado
         rvItens.setAdapter(myAdapter);//setamos o adapter no recycleview
         rvItens.setHasFixedSize(true);
@@ -60,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
     //Criação do método que irá gerar resultado
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -73,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
                 myItem.title = data.getStringExtra("title");
                 myItem.description = data.getStringExtra("description");
                 Uri selectedPhotoURI = data.getData();
+
+                MainActivityViewModel vm = new ViewModelProvider(this).get(MainActivityViewModel.class);
+                List<MyItem> itens = vm.getItens();
+
+                itens.add(myItem);
+                myAdapter.notifyItemInserted(itens.size()-1);
+
+
 
                 try {
                     //Função que carrega a imagem e guarda no bitmap
