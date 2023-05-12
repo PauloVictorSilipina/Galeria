@@ -21,9 +21,9 @@ import rodrigues.alves.lista.model.NewItemActivityViewModel;
 public class NewItemActivity extends AppCompatActivity {
 
     static int PHOTO_PICKER_REQUEST=1;
-    @Override
-
     //Método onCreate
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_item);
@@ -56,6 +56,7 @@ public class NewItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Aviso para dizer que precisa adicionar imagem
+                Uri selectPhotoLocation = vm.getSelectedPhotoLocation();
                 if(selectPhotoLocation == null) {
                     Toast.makeText(NewItemActivity.this, "É necessário selecionar uma imagem!",
                             Toast.LENGTH_LONG).show();
