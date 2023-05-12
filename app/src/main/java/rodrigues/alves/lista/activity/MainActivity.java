@@ -47,12 +47,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        RecyclerView rvItens = findViewById(R.id.rvItens);
-        MainActivityViewModel vm = new ViewModelProvider(this).get(MainActivityViewModel.class);
-        List<MyItem> itens = vm.getItens();
+        RecyclerView rvItens = findViewById(R.id.rvItens); //Crio o recyclevieew
+        MainActivityViewModel vm = new ViewModelProvider(this).get(MainActivityViewModel.class); //ViewModel da mainactivity
+        List<MyItem> itens = vm.getItens(); //Criado a lista de itens
         myAdapter = new MyAdapter(this, itens);//myadapter criado
         rvItens.setAdapter(myAdapter);//setamos o adapter no recycleview
         rvItens.setHasFixedSize(true);
+
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);//criado um gerenciador de layout linear
         rvItens.setLayoutManager(layoutManager);

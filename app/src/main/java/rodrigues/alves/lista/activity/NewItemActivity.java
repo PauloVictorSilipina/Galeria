@@ -28,8 +28,10 @@ public class NewItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_item);
 
+        //Crio o viewmodel
         NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
 
+        //Adiciona a imagem do ViewModel para o photoLocation para não deixar nulo ao selecionar uma foto
         Uri selectPhotoLocation = vm.getSelectedPhotoLocation();
         if(selectPhotoLocation != null) {
             ImageView imvfotoPreview = findViewById(R.id.imvfotoPreview);
@@ -62,6 +64,7 @@ public class NewItemActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                     return;
                 }
+
                 EditText etTitle = findViewById(R.id.etTitle);
                 String title = etTitle.getText().toString();
 
@@ -108,7 +111,7 @@ public class NewItemActivity extends AppCompatActivity {
 
                 imvfotoPreview.setImageURI(photoSelected);
 
-                NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class);
+                NewItemActivityViewModel vm = new ViewModelProvider(this).get(NewItemActivityViewModel.class); //guarda no vm o uri da img
                 vm.setSelectedPhotoLocation(photoSelected);
             }
         }
